@@ -6,7 +6,6 @@ import ru.gb.spring_shop.Model.Product;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -32,5 +31,13 @@ public class ProductRepository {
         return products.stream().filter(product -> product.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Product tot found"));
+    }
+
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
+    public void removeProduct(Long id) {
+        products.remove(getById(id));
     }
 }

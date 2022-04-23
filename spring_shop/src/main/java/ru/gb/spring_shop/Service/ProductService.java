@@ -21,4 +21,18 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return Collections.unmodifiableList(productRepository.getProducts());
     }
+
+    public void addProduct(Product product) {
+        productRepository.addProduct(product);
+    }
+
+    public void changeCost(Long id, Integer cost) {
+        Product product = productRepository.getById(id);
+        product.setCost(product.getCost() + cost);
+        // productRepository.save(product);
+    }
+
+    public void removeProduct(Long id) {
+        productRepository.removeProduct(id);
+    }
 }
