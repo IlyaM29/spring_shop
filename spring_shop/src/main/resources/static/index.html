@@ -20,7 +20,7 @@
                 <td>ID</td>
                 <td>Название продукта</td>
                 <td>Цена</td>
-                <td>Действие</td>
+<!--                <td>Действие</td>-->
             </tr>
             <tbody>
             <tr ng-repeat="p in productList">
@@ -31,9 +31,26 @@
                     {{p.cost}}
                     <button class="btn btn-primary" ng-click="changeCost(p.id, 1)">+</button>
                 </td>
+                <!--
                 <td>
                     <button CLASS="btn btn-danger" ng-click="remove(p.id)">Удалить</button>
                 </td>
+                -->
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <h3>Список покупателей</h3>
+        <br>
+        <table class="table table-hover" cellpadding="0" cellspacing="0">
+            <tr>
+                <td>ID</td>
+                <td>Имя</td>
+            </tr>
+            <tbody>
+            <tr ng-repeat="b in buyerList">
+                <td>{{b.id}}</td>
+                <td>{{b.name}}</td>
             </tr>
             </tbody>
         </table>

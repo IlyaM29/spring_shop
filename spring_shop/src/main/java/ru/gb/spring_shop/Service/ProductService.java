@@ -22,9 +22,9 @@ public class ProductService {
         return Collections.unmodifiableList(productRepository.getProducts());
     }
 
-    public void addProduct(Product product) {
-        productRepository.addProduct(product);
-    }
+//    public void addProduct(Product product) {
+//        productRepository.addProduct(product);
+//    }
 
     public void changeCost(Long id, Integer cost) {
         Product product = productRepository.getById(id);
@@ -32,7 +32,7 @@ public class ProductService {
         // productRepository.save(product);
     }
 
-    public void removeProduct(Long id) {
-        productRepository.removeProduct(id);
-    }
+//    public void removeProduct(Long id) {
+//        productRepository.removeProduct(id);
+//    }
 }

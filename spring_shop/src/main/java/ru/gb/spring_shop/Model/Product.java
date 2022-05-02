@@ -1,9 +1,20 @@
 package ru.gb.spring_shop.Model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "products")
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "cost")
     private Integer cost;
 
     public Product(Long id, String title, Integer cost) {

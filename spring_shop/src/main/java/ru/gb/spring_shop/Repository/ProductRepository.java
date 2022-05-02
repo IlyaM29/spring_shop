@@ -1,7 +1,9 @@
 package ru.gb.spring_shop.Repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.gb.spring_shop.Model.Product;
+import ru.gb.spring_shop.Model.ProductDaoImpl;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -13,31 +15,31 @@ public class ProductRepository {
 
     private List<Product> products;
 
-    @PostConstruct
-    public void init() {
-        products = new ArrayList<>(Arrays.asList(
-                new Product(1L, "Bread", 10),
-                new Product(2L, "Milk", 24),
-                new Product(3L, "Tomato", 20),
-                new Product(4L, "Cucumber", 16)
-        ));
-    }
+    @Autowired
+    private ProductDaoImpl productDao;
+
+//    public void init() {
+//        products = new ArrayList<>(Arrays.asList(
+//                new Product(1L, "Bread", 10),
+//                new Product(2L, "Milk", 24),
+//                new Product(3L, "Tomato", 20),
+//                new Product(4L, "Cucumber", 16)
+//        ));
+//    }
 
     public List<Product> getProducts() {
-        return products;
+        return productDao.findAll();
     }
 
     public Product getById(Long id) {
-        return products.stream().filter(product -> product.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Product tot found"));
+        return productDao.findById(id);
     }
 
-    public void addProduct(Product product) {
-        products.add(product);
-    }
-
-    public void removeProduct(Long id) {
-        products.remove(getById(id));
-    }
+//    public void addProduct(Product product) {
+//        products.add(product);
+//    }
+//
+//    public void removeProduct(Long id) {
+//        products.remove(getById(id));
+//    }
 }
