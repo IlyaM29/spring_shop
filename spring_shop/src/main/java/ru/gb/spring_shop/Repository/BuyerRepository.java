@@ -19,4 +19,12 @@ public class BuyerRepository {
     public List<Buyer> getBuyers() {
         return buyerDao.findAll();
     }
+
+    public Buyer findBuyerById(Long id) {
+        return buyerDao.findBuyerById(id);
+    }
+
+    public List<Product> getBuyersPurchasesById(Long id) {
+        return buyerDao.getBuyersPurchasesById(id);
+    }
 }

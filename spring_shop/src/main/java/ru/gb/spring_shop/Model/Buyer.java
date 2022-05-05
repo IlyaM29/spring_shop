@@ -1,6 +1,9 @@
 package ru.gb.spring_shop.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "buyers")
@@ -14,12 +17,29 @@ public class Buyer {
     @Column(name = "name")
     private String name;
 
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "purchases",
+            joinColumns = @JoinColumn(name = "buyer_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products;
+
     public Buyer(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
     public Buyer() {
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public Long getId() {

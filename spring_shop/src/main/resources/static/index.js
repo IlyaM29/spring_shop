@@ -7,6 +7,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
                 $scope.productList = response.data;
             });
     };
+    // $scope.loadProduct();
 
     $scope.loadBuyer = function () {
         $http.get(contextPath + '/buyer/all')
@@ -29,6 +30,19 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     };
 
+    $scope.purchases = function (id) {
+        $http({
+            url: contextPath + '/buyer/purchases',
+            method: 'GET',
+            params: {
+                id: id
+            }
+        }).then(function (response) {
+            $scope.buyersPurchases = response.data;
+        })
+    };
+    // $scope.purchases();
+
     // $scope.remove = function (productId) {
     //     $http({
     //         url: contextPath + '/product/remove',
@@ -41,5 +55,4 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     //     })
     // }
 
-    $scope.loadProduct();
 });

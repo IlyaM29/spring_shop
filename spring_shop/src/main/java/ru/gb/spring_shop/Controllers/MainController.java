@@ -28,6 +28,16 @@ public class MainController {
         return buyerService.getAllBuyers();
     }
 
+    @GetMapping("/buyer/info")
+    public Buyer getBuyerById(@RequestParam Long id) {
+        return buyerService.getBuyerById(id);
+    }
+
+    @GetMapping("/buyer/purchases")
+    public List<Product> getBuyersPurchasesById(@RequestParam Long id) {
+        return buyerService.getBuyersPurchasesById(id);
+    }
+
     @GetMapping("/product/change_cost")
     public void changeCost(@RequestParam Long productId, @RequestParam Integer delta) {
         productService.changeCost(productId, delta);

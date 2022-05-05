@@ -17,7 +17,18 @@ public class BuyerDaoImp {
         this.sessionFactoryUtils = sessionFactoryUtils;
     }
 
-    public Buyer findById(Long id) {
+    public List<Product> getBuyersPurchasesById(Long id) {
+        try (Session session = sessionFactoryUtils.getSession()) {
+            session.beginTransaction();
+            Buyer buyer = session.get(Buyer.class, id);
+            List<Product> products = buyer.getProducts();
+            System.out.println(products); // без этого не выводит продукты
+            session.getTransaction().commit();
+            return products;
+        }
+    }
+
+    public Buyer findBuyerById(Long id) {
         try (Session session = sessionFactoryUtils.getSession()) {
             session.beginTransaction();
             Buyer buyer = session.get(Buyer.class, id);
