@@ -11,28 +11,29 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    @Autowired
     private ProductRepository productRepository;
 
-    public Product findProductById(Long id) {
-        return productRepository.getById(id);
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    public Product findById(Long id) {
+        return productRepository.findById(id).orElseThrow();
     }
 
     public List<Product> getAllProducts() {
-        return Collections.unmodifiableList(productRepository.getProducts());
+        return productRepository.findAll();
     }
 
-//    public void addProduct(Product product) {
-//        productRepository.addProduct(product);
-//    }
-
-    public void changeCost(Long id, Integer cost) {
-        Product product = productRepository.getById(id);
-        product.setCost(product.getCost() + cost);
-        // productRepository.save(product);
+    public void addProduct(String title, Integer cost) {
+        productRepository.save(new Product(title, cost));
     }
 
-//    public void removeProduct(Long id) {
-//        productRepository.removeProduct(id);
-//    }
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
+    }
+
+    public List<Product> findByCost(Integer min, Integer max) {
+        return productRepository.findAllByCostBetween(min, max);
+    }
 }
