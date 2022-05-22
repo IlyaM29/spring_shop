@@ -8,4 +8,17 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             });
     };
     $scope.loadProduct();
+
+    $scope.filterProduct = function (){
+        $http({
+            url: contextPath + '/products/cost',
+            method: 'GET',
+            params: {
+                min: $scope.min,
+                max: $scope.max
+            }
+        }).then(function (response) {
+            $scope.productList = response.data;
+        })
+    }
 });

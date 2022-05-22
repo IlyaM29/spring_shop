@@ -7,6 +7,7 @@ import ru.gb.spring_shop.Repository.ProductRepository;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -17,8 +18,8 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product findById(Long id) {
-        return productRepository.findById(id).orElseThrow();
+    public Optional<Product> findById(Long id) {
+        return productRepository.findById(id);
     }
 
     public List<Product> getAllProducts() {

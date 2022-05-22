@@ -1,11 +1,16 @@
 package ru.gb.spring_shop.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.spring_shop.Model.Product;
 import ru.gb.spring_shop.Service.ProductService;
+import ru.gb.spring_shop.exceptions.AppError;
+import ru.gb.spring_shop.exceptions.ResourceNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class MainController {
@@ -16,14 +21,14 @@ public class MainController {
         this.productService = productService;
     }
 
-    @GetMapping("/products/{id}")
-    public Product findById(@PathVariable Long id) {
-        return productService.findById(id);
-    }
-
     @GetMapping("/products")
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
+    }
+
+    @GetMapping("/products/{id}")
+    public Product findById(@PathVariable Long id) {
+        return productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product with id: " + id + " is not found"));
     }
 
     @PostMapping("/products")
