@@ -1,31 +1,23 @@
-package ru.gb.spring_shop.Model;
+package ru.gb.spring_shop.Dto;
 
-import javax.persistence.*;
+import ru.gb.spring_shop.Model.Product;
 
-@Entity
-@Table(name = "products")
-public class Product {
+public class ProductDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
 
     private Integer cost;
 
-    public Product(Long id, String title, Integer cost) {
-        this.id = id;
-        this.title = title;
-        this.cost = cost;
+    public ProductDto(Product product) {
+        this.id = product.getId();
+        this.title = product.getTitle();
+        this.cost = product.getCost();
     }
 
-    public Product(String title, Integer cost) {
-        this.title = title;
-        this.cost = cost;
+    public ProductDto() {
     }
-
-    public Product() {}
 
     public Long getId() {
         return id;
