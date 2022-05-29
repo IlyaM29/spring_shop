@@ -1,9 +1,16 @@
 package ru.gb.spring_shop.Model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 
     @Id
@@ -13,41 +20,4 @@ public class Product {
     private String title;
 
     private Integer cost;
-
-    public Product(Long id, String title, Integer cost) {
-        this.id = id;
-        this.title = title;
-        this.cost = cost;
-    }
-
-    public Product(String title, Integer cost) {
-        this.title = title;
-        this.cost = cost;
-    }
-
-    public Product() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getCost() {
-        return cost;
-    }
-
-    public void setCost(Integer cost) {
-        this.cost = cost;
-    }
 }

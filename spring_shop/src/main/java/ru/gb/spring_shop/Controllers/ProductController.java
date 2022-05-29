@@ -1,21 +1,19 @@
 package ru.gb.spring_shop.Controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.spring_shop.Dto.ProductDto;
-import ru.gb.spring_shop.Model.Product;
 import ru.gb.spring_shop.Service.ProductService;
-import ru.gb.spring_shop.exceptions.ResourceNotFoundException;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
-public class MainController {
+//@RequiredArgsConstructor
+public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
-    public MainController(ProductService productService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
@@ -33,6 +31,11 @@ public class MainController {
         return productService.findById(id);
     }
 
+    @PutMapping
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+        return productService.update(productDto);
+    }
+
     @PostMapping
     public void addProduct(@RequestBody ProductDto productDto) {
         productService.addProduct(productDto);
@@ -40,6 +43,11 @@ public class MainController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteProduct (@PathVariable Long id) {
-        productService.deleteProduct(id);
+        productService.deleteProductById(id);
+    }
+
+    @PatchMapping("/{id}/title")
+    public void patchTitle(@PathVariable Long id, @RequestBody ProductDto productDto) {
+        productService.updateTitle(id, productDto);
     }
 }
